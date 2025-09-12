@@ -32,7 +32,7 @@ async function bootstrap() {
     '/docs',
     apiReference({
       spec: { content: document },
-      theme: 'saturn',
+      theme: 'bluePlanet',
       layout: 'modern',
     }),
   )

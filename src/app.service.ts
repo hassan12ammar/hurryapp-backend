@@ -1,8 +1,13 @@
 import { Injectable } from '@nestjs/common'
+import { StorageObjectDto } from './app.dto'
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!'
+  match(dto: StorageObjectDto) {
+    console.log(dto.file)
+
+    return {
+      matching: 0.75,
+    }
   }
 }

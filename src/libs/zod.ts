@@ -1,19 +1,9 @@
 import { createZodDto, ZodDtoStatic } from '@anatine/zod-nestjs'
-import {
-  ZodBoolean,
-  ZodDiscriminatedUnion,
-  ZodNumber,
-  ZodObject,
-  ZodReadonly,
-  ZodString,
-  ZodType,
-  ZodTypeAny,
-} from 'zod'
+import { ZodDiscriminatedUnion, ZodObject, ZodReadonly, ZodTypeAny } from 'zod'
 import { ArgumentMetadata, PipeTransform } from '@nestjs/common'
 import { Event } from './events'
 import Zod from 'zod'
 import { extendZodWithOpenApi, OpenApiZodAny } from '@anatine/zod-openapi'
-import { env } from './env'
 import { formatZodError } from './helpers'
 
 export function Dto<T extends OpenApiZodAny, E extends boolean = false>(

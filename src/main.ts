@@ -1,4 +1,4 @@
-import { NestFactory } from '@nestjs/core'
+import { HttpAdapterHost, NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
 import { env } from './libs/env'
 import { Logger } from '@nestjs/common'
@@ -7,11 +7,14 @@ import { ZodValidationPipe } from './libs/zod'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { writeFileSync } from 'fs'
 import { apiReference } from '@scalar/nestjs-api-reference'
+import { ReqExceptionsFilter } from './libs/app.filter'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: ['error', 'warn', 'log'],
   })
+
+  app.useGlobalFilters(new ReqExceptionsFilter(app.get(HttpAdapterHost)))
 
   patchNestjsSwagger()
 
@@ -33,6 +36,8 @@ async function bootstrap() {
       layout: 'modern',
     }),
   )
+
+  SwaggerModule.setup('api', app, document)
 
   await app.listen(env.PORT, () => {
     Logger.log(

@@ -1,4 +1,4 @@
-import { createZodDto, ZodDtoStatic } from "@anatine/zod-nestjs"
+import { createZodDto, ZodDtoStatic } from '@anatine/zod-nestjs'
 import {
   ZodBoolean,
   ZodDiscriminatedUnion,
@@ -8,13 +8,13 @@ import {
   ZodString,
   ZodType,
   ZodTypeAny,
-} from "zod"
-import { ArgumentMetadata, PipeTransform } from "@nestjs/common"
-import { Event } from "./events"
-import Zod from "zod"
-import { extendZodWithOpenApi, OpenApiZodAny } from "@anatine/zod-openapi"
-import { env } from "./env"
-import { formatZodError } from "./helpers"
+} from 'zod'
+import { ArgumentMetadata, PipeTransform } from '@nestjs/common'
+import { Event } from './events'
+import Zod from 'zod'
+import { extendZodWithOpenApi, OpenApiZodAny } from '@anatine/zod-openapi'
+import { env } from './env'
+import { formatZodError } from './helpers'
 
 export function Dto<T extends OpenApiZodAny, E extends boolean = false>(
   zodSchema: T,
@@ -52,7 +52,7 @@ export class ZodValidationPipe implements PipeTransform {
         const { error } = parseResult
         const message = formatZodError(error)
 
-        throw new Event("VALIDATION", "BAD_REQUEST").setMeta(message)
+        throw new Event('VALIDATION', 'BAD_REQUEST').setMeta(message)
       }
 
       return parseResult.data

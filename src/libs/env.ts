@@ -1,6 +1,6 @@
-import { config } from "dotenv"
-import { join } from "path"
-import { zod as z } from "./zod"
+import { config } from 'dotenv'
+import { join } from 'path'
+import { zod as z } from './zod'
 
 config({
   path: join(process.cwd(), `.env`),

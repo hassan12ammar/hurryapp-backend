@@ -1,4 +1,4 @@
-import { HttpStatus } from "@nestjs/common"
+import { HttpStatus } from '@nestjs/common'
 type NestedKeys<T> = { [K in keyof T]: keyof T[K] }[keyof T]
 
 const DomainMap = {
@@ -142,22 +142,22 @@ export type Reason = NestedKeys<typeof DomainMap>
 
 // NOTE: domains that must have the base data reasons needed (NOT_FOUND and CONFLICT)
 const DataDomains = [
-  "CENTER",
-  "HOUSEHOLD",
-  "EMPLOYEE",
-  "AGENT",
-  "MEMBER",
-  "LEGACYHOUSEHOLD",
-  "LEGACYMEMBER",
-  "NATIONALIDCARD",
-  "RESIDENCYCARD",
-  "DATASTORE",
-  "TICKET",
-  "TICKETTEMPLATE",
-  "CHECKOUT",
-  "STATS",
-  "HISTORY",
-  "ROLE",
+  'CENTER',
+  'HOUSEHOLD',
+  'EMPLOYEE',
+  'AGENT',
+  'MEMBER',
+  'LEGACYHOUSEHOLD',
+  'LEGACYMEMBER',
+  'NATIONALIDCARD',
+  'RESIDENCYCARD',
+  'DATASTORE',
+  'TICKET',
+  'TICKETTEMPLATE',
+  'CHECKOUT',
+  'STATS',
+  'HISTORY',
+  'ROLE',
 ] as const satisfies Domain[]
 export type DataDomain = (typeof DataDomains)[number]
 

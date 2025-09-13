@@ -22,7 +22,7 @@ export class AppService {
 
     return {
       matching,
-      fingerprintId: "80248e80-0d20-46a4-bd72-43f9be2e2a54",
+      fingerprintId: '80248e80-0d20-46a4-bd72-43f9be2e2a54',
       time: endTime - startTime,
     }
   }
@@ -30,12 +30,13 @@ export class AppService {
   async createUser(dto: CreateUserDto) {
     const hash = await bcrypt.hash(dto.password, env.SALT)
 
-    return this.kyselyService.primary
+    await this.kyselyService.primary
       .insertInto('users')
       .values({
         name: dto.name,
         role: dto.role,
         imagePath: dto.image.path,
+        fingerprintId: dto.fingerPrintId,
         hash,
       })
       .execute()

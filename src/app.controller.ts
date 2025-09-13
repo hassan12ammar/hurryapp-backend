@@ -26,7 +26,7 @@ export class AppController {
 
   @Post('user')
   @ApiConsumes('multipart/form-data')
-  @UseInterceptors(FileInterceptor('image', multerConfig), FileToBodyInterceptor)
+  @UseInterceptors(FileInterceptor('file', multerConfig), FileToBodyInterceptor)
   async createUser(@Body() dto: CreateUserDto) {
     return this.appService.createUser(dto)
   }

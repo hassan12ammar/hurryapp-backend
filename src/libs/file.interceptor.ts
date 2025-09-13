@@ -12,7 +12,7 @@ export class FileToBodyInterceptor implements NestInterceptor {
     const req = context.switchToHttp().getRequest()
 
     if (req.file) {
-      req.body.image = req.file
+      req.body.file = req.file
     }
 
     return next.handle()

@@ -35,7 +35,7 @@ export class AppService {
       .values({
         name: dto.name,
         role: dto.role,
-        imagePath: dto.image.path,
+        imagePath: dto.file.path,
         fingerprintId: dto.fingerPrintId,
         hash,
       })

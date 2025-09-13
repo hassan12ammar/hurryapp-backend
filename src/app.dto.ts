@@ -21,7 +21,7 @@ export class CreateUserDto extends Dto(
     password: z.string(),
     fingerPrintId: z.string(),
     role: z.string(),
-    image: z.custom<Express.Multer.File>().optional().openapi({
+    file: z.custom<Express.Multer.File>().optional().openapi({
       type: 'string',
       format: 'binary',
     }),

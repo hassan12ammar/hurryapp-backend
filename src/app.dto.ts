@@ -18,10 +18,12 @@ export class StorageObjectDto extends Dto(
 export class CreateUserDto extends Dto(
   z.object({
     name: z.string(),
-    password: z.string(),
-    fingerPrintId: z.string(),
     role: z.string(),
     file: z.custom<Express.Multer.File>().optional().openapi({
+      type: 'string',
+      format: 'binary',
+    }),
+    fingerPrintfile: z.custom<Express.Multer.File>().optional().openapi({
       type: 'string',
       format: 'binary',
     }),

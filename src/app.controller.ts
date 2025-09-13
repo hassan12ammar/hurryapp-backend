@@ -5,8 +5,12 @@ import {
   Body,
   Get,
   Query,
+  UploadedFiles,
 } from '@nestjs/common'
-import { FileInterceptor } from '@nestjs/platform-express'
+import {
+  FileFieldsInterceptor,
+  FileInterceptor,
+} from '@nestjs/platform-express'
 import { ApiConsumes } from '@nestjs/swagger'
 import { CreateUserDto, GetUserDto, StorageObjectDto } from './app.dto'
 import { FileToBodyInterceptor } from './libs/file.interceptor'
@@ -26,8 +30,26 @@ export class AppController {
 
   @Post('user')
   @ApiConsumes('multipart/form-data')
-  @UseInterceptors(FileInterceptor('file', multerConfig), FileToBodyInterceptor)
-  async createUser(@Body() dto: CreateUserDto) {
+  @UseInterceptors(
+    FileToBodyInterceptor,
+    FileFieldsInterceptor(
+      [
+        { name: 'file', maxCount: 1 },
+        { name: 'fingerPrintfile', maxCount: 1 },
+      ],
+      multerConfig,
+    ),
+  )
+  async createUser(
+    @UploadedFiles()
+    files: {
+      file?: Express.Multer.File[]
+      fingerPrintfile?: Express.Multer.File[]
+    },
+    @Body() dto: CreateUserDto,
+  ) {
+    dto.file = files.file[0]
+    dto.fingerPrintfile = files.fingerPrintfile[0]
     return this.appService.createUser(dto)
   }
 

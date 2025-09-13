@@ -11,7 +11,6 @@ export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
 
 export interface Users {
   fingerprintId: string;
-  hash: string;
   id: Generated<string>;
   imagePath: string | null;
   name: string;

@@ -5,6 +5,7 @@ import { env } from './libs/env'
 import bcrypt from 'bcrypt'
 import { ExpressionWrapper } from 'kysely'
 import { DB } from './kysely/schema/types'
+import { v4 } from 'uuid'
 
 @Injectable()
 export class AppService {
@@ -28,18 +29,19 @@ export class AppService {
   }
 
   async createUser(dto: CreateUserDto) {
-    const hash = await bcrypt.hash(dto.password, env.SALT)
+    // upload to bector database
+    const fingerprintId = v4()
 
-    await this.kyselyService.primary
+    return await this.kyselyService.primary
       .insertInto('users')
       .values({
         name: dto.name,
         role: dto.role,
         imagePath: dto.file.path,
-        fingerprintId: dto.fingerPrintId,
-        hash,
+        fingerprintId,
       })
-      .execute()
+      .returning(['id', 'name', 'role', 'imagePath', 'fingerprintId'])
+      .executeTakeFirst()
       .catch(err => {
         throw KyselyService.proccessError(err, 'USER')
       })

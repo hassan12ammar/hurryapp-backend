@@ -26,6 +26,7 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/serve-static": "^5.0.3",
     "@scalar/nestjs-api-reference": "^1.0.1",
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.2.2",
     "kysely": "^0.28.5",
     "pg": "^8.16.3",
@@ -37,6 +38,7 @@
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
+    "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.0",
     "@types/multer": "^2.0.0",
     "@types/node": "^20.3.1",

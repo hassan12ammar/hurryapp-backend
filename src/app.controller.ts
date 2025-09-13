@@ -1,7 +1,14 @@
-import { Controller, Post, UseInterceptors, Body } from '@nestjs/common'
+import {
+  Controller,
+  Post,
+  UseInterceptors,
+  Body,
+  Get,
+  Query,
+} from '@nestjs/common'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { ApiConsumes } from '@nestjs/swagger'
-import { StorageObjectDto } from './app.dto'
+import { CreateUserDto, GetUserDto, StorageObjectDto } from './app.dto'
 import { FileToBodyInterceptor } from './libs/file.interceptor'
 import { AppService } from './app.service'
 
@@ -16,8 +23,15 @@ export class AppController {
     return this.appService.match(dto)
   }
 
-  @Post('test-db')
-  async testDb() {
-    return this.appService.testDb()
+  @Post('user')
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(FileInterceptor('image'), FileToBodyInterceptor)
+  async createUser(@Body() dto: CreateUserDto) {
+    return this.appService.createUser(dto)
+  }
+
+  @Get('users')
+  async listUsers(@Query() dto: GetUserDto) {
+    return this.appService.GetUser(dto)
   }
 }

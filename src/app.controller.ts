@@ -15,4 +15,9 @@ export class AppController {
   match(@Body() dto: StorageObjectDto) {
     return this.appService.match(dto)
   }
+
+  @Post('test-db')
+  async testDb() {
+    return this.appService.testDb()
+  }
 }

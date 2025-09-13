@@ -4,6 +4,7 @@ import { AppService } from './app.service'
 import { ServeStaticModule } from '@nestjs/serve-static'
 import { join } from 'path'
 import { KyselyService } from './kysely'
+import { PythonService } from './python.service'
 
 @Module({
   imports: [
@@ -15,6 +16,6 @@ import { KyselyService } from './kysely'
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, KyselyService],
+  providers: [AppService, KyselyService, PythonService],
 })
 export class AppModule {}

@@ -3,13 +3,9 @@ import { spawn } from 'child_process'
 
 @Injectable()
 export class PythonService {
-  runPython(a: number, b: number): Promise<number> {
+  runPython(path: string, a: number, b: number): Promise<number> {
     return new Promise((resolve, reject) => {
-      const process = spawn('python3', [
-        'script.py',
-        a.toString(),
-        b.toString(),
-      ])
+      const process = spawn('python3', [path, a.toString(), b.toString()])
       let output = ''
 
       process.stdout.on('data', data => (output += data.toString()))

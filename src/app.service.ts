@@ -1,22 +1,24 @@
 import { Injectable } from '@nestjs/common'
 import { CreateUserDto, GetUserDto, StorageObjectDto } from './app.dto'
 import { KyselyService } from './kysely'
-import { env } from './libs/env'
-import bcrypt from 'bcrypt'
 import { ExpressionWrapper } from 'kysely'
 import { DB } from './kysely/schema/types'
 import { v4 } from 'uuid'
+import { PythonService } from './python.service'
 
 @Injectable()
 export class AppService {
-  constructor(private readonly kyselyService: KyselyService) {}
+  constructor(
+    private readonly kyselyService: KyselyService,
+    private readonly pythonService: PythonService,
+  ) {}
 
   async match(dto: StorageObjectDto) {
-    console.log(dto.file)
-
     // get the time it took to get the match result
     const startTime = Date.now()
     // let's assume we have a matching algorithm
+    const result = await this.pythonService.runPython('script.py', 1, 2)
+    console.log(result)
     await new Promise(resolve => setTimeout(resolve, 14))
     const matching = 0.75
     const endTime = Date.now()

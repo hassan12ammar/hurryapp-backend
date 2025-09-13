@@ -10,7 +10,7 @@ config({
 const Env = z.object({
   PORT: z.coerce.number(),
   DATABASE_URL: z.string(),
-  SALT: z.coerce.number(),
+  // SALT: z.coerce.number(),
   // PAGINATION_DEFAULT_PER_PAGE: z.coerce.number(),
   // PAGINATION_MAX_PER_PAGE: z.coerce.number(),
   // TOKEN_ACCESS_SECRET: z.string(),
